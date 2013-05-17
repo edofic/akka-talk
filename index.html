@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Concurrent and parallel programming with Akka</title>
+
+		<meta name="description" content="Concurrent and parallel programming with Akka">
+		<meta name="author" content="Andraž Bajt">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Akka</h1>
+					<h3>concurrency and parallelism</h3>
+					<p>
+						<small>Andraž Bajt / <a href="http://twitter.com/edofic">@edofic</a></small>
+					</p>
+				</section>
+				
+				<section>
+				  <h2>Motivation</h2>
+				  <ul>
+  				  <li class="fragment">Object Oriented Programming!</li>
+	  			  <li class="fragment">Thread safety hell</li>
+	  			  <li class="fragment">Event processing</li>
+  			  </ul>
+  			  <p> </p>
+  			  <p class="fragment"><b>The Actor Model</b> (from Erlang)</p>
+				  <aside class="notes">note this!</aside>
+				</section>
+				
+				<section>
+				  <section>
+				    <h2>Sample</h2>
+				    <p>Usage</p>
+				    <pre><code data-trim>
+import akka.actor._				  
+val sys = ActorSystem()
+val worker = sys.actorOf(Props[Worker])				  
+		      
+worker ! DoStuff("details")
+val question: Future[Question] = worker ? 42
+			      </code></pre>
+				  </section>
+				  
+				  <section>
+				  <h2>Sample</h2>
+				    <p>Defining actors</p>
+				    <pre><code data-trim>
+import akka.actor._
+				  
+case class DoStuff(s: String)
+
+class Worker extends Actor {
+  case DoStuff(s) => println(s)
+  case n: Int => sender ! "You'll need a bigger computer for that"
+}
+			      </code></pre>
+				  </section>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
