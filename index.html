@@ -16,7 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
-
+		
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -46,16 +46,29 @@
 				</section>
 				
 				<section>
-				  <h2>Motivation</h2>
+				  <h2>Threads</h2>
 				  <ul>
-  				  <li class="fragment">Object Oriented Programming!</li>
-	  			  <li class="fragment">Thread safety hell</li>
-	  			  <li class="fragment">Event processing</li>
-  			  </ul>
-  			  <p> </p>
-  			  <p class="fragment"><b>The Actor Model</b> (from Erlang)</p>
+				    <li>Good for OS/processor</li>
+				    <li>Bad for programmer</li>
+				    <li>Deadlocks, race conditions, synchronization</li>
+				    <li>"Impossible" to get right</li>
+				  </ul>
+				  <img src="img/thread-mess.jpg" width=600 height=400 style="margin-top:50px;"/>
 				  <aside class="notes">note this!</aside>
 				</section>
+				
+				<section>
+				  <h2>Callbacks</h2>
+				  <ul>
+				    <li>Node.js is popular</li>
+				    <li>Impure</li>
+				    <li>Error handling</li>
+				    <li>Unreadable</li>
+				    <img src="img/yo-callback.jpg" style="margin-top:50px;"/>
+				  </ul>
+				  <aside class="notes">node is popular because it's non-blocking</aside>
+				</section>
+				
 				
 				<section>
 				  <section>
