@@ -43,6 +43,11 @@
 					<p>
 						<small>Andraž Bajt / <a href="http://twitter.com/edofic">@edofic</a></small>
 					</p>
+					<aside class="notes">
+					  I'm a student. Programming in scala for a year. Doing some Akka stuff currently.<br>
+					  I'm on twitter and some other networks, I have a blog.<br>
+					  How many are familiar with akka?
+					</aside>
 				</section>
 				
 				<section>
@@ -54,7 +59,13 @@
 				    <li>"Impossible" to get right</li>
 				  </ul>
 				  <img src="img/thread-mess.jpg" width=600 height=400 style="margin-top:50px;"/>
-				  <aside class="notes">note this!</aside>
+				  <aside class="notes">
+				    Lightweight processes. Time sharing. Need shared data = communicate through 
+				    side effects. BAD. There are books like "Java concurrency in practice". Who
+				    read that? <br>
+				    Error handling. Try catch. Everbody has to know how to fix the vending machine.
+				    Harder to be faster since this is how hardware works.
+				  </aside>
 				</section>
 				
 				<section>
@@ -66,9 +77,29 @@
 				    <li>Unreadable</li>
 				    <img src="img/yo-callback.jpg" style="margin-top:50px;"/>
 				  </ul>
-				  <aside class="notes">node is popular because it's non-blocking</aside>
+				  <aside class="notes">
+				    Been here since ever e.g. function pointers in C. <br>
+				    AFAIK node made this popular. <br>
+  				  node is popular because it's non-blocking. This means it cannot block and wait. 
+  				  And node solves this with callbacks. communicate through side effects. therefore impure <br>
+  				  no one to catch errors. Vending machine has to fix itself. When it's dead. hard. 
+				    Indentation/callback hell. Monads in javascript. Cool.
+				  </aside>
 				</section>
 				
+				<section>
+				  <h2>The Actor Model</h2>
+				  <p>Erlang 1973</p>
+				  <p>Different take on OO</p>
+				  <img src="img/msg-diagram.png" style="margin-top:50px;"/>
+				  <aside class="notes">
+				    Picture says it all. There are lightweight actors that send messages to eachother.
+				    Every actor has a mailbox. I processes one message at a time. Therefore single threaded.
+			      EASY to reason about. Can wrap mutable state safely. <br>
+			      Can create new actors. Graphs that heal them self. Vending machine is just a proxy to 
+			      another vending machine. And it can repair it. 
+				  </aside>
+				</section>
 				
 				<section>
 				  <section>
