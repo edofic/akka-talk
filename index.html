@@ -99,7 +99,53 @@ class Worker extends Actor {
 			      </code></pre>
 				  </section>
 				</section>
+				
+				<section>
+				  <h2>Routing</h2>
+				  <pre><code data-trim>
+import akka.routing.RoundRobin			
+val worker = sys.actorOf(
+  Props[Worker] withRouter RoundRobin(5),
+  "myWorker" 
+)
+				  </code></pre>
+				</section>
+				
+				<section>
+				  <h2>Config</h2>
+          <p>Exact same code!</p>
+				  <pre><code data-trim>
+akka.actor.deployment {
+  /myWorker {
+    router = random-router
+    nr-of-instances = 17
+  }
+}
+				  </code></pre>
+				  <aside class="notes">
+				    There is also router FromConfig. You can define your own.
+				  </aside>
+				</section>
+				
+				<section>
+				  <h2>Going remote</h2>
+				  <p>Just change the config<p>
+				  <ul>
+				    <li>remote deploy</li>
+				    <li>remote actor lookup</li>
+				  </ul>
+				  <img src="img/remote-giraffe.jpg" style="margin-top:50px;"/>
+				</section>
 
+        <section>
+          <h2>More info</h2>
+          <p>See http://akka.io/</p>
+          <br>
+          <p>
+          And there is plenty of documentation at <br>
+          http://doc.akka.io/docs/akka/
+          <p>
+        </section>
 			</div>
 
 		</div>
