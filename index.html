@@ -105,7 +105,7 @@
         </section>
 
         <section>
-            <section>
+           <section>
                 <h2>Sample</h2>
                 <p>Defining actors</p>
 				      <pre><code data-trim>
@@ -114,21 +114,28 @@ import akka.actor._
 case class DoStuff(s: String)
 
 class Worker extends Actor {
-  case DoStuff(s) => println(s)
-  case 42 => sender ! "You'll need a bigger computer for that"
+  def receive = {
+    case DoStuff(s) => doStuff(s)
+    case msg: String => println(msg)
+    case 42 => sender ! "You'll need a bigger computer for that"
+  }
+
+  def doStuff(s: String) = ... //some blocking operation
 }
                       </code></pre>
             </section>
-
             <section>
                 <h2>Sample</h2>
                 <p>Usage</p>
 				    <pre><code data-trim>
 import akka.actor._
+import akka.pattern.ask
+
 val sys = ActorSystem()
 val worker = sys.actorOf(Props[Worker])
 
 worker ! DoStuff("details")
+worker ! "hello world"
 val question: Future[Question] = worker ? 42
                     </code></pre>
             </section>
